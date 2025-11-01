@@ -1,8 +1,8 @@
 import '../../src.dart';
 
-@lazySingleton
-abstract class PermissionHandlerService{
 
+@lazySingleton
+class PermissionHandlerService{
   /// Check for permissions
 
   Future<bool> checkCameraPermission() async {

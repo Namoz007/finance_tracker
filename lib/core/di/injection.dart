@@ -1,5 +1,4 @@
 import '../../src.dart';
-import 'injection.config.dart';
 
 final sl = GetIt.instance;
 

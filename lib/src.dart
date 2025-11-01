@@ -44,3 +44,8 @@ export 'core/core.dart';
 export 'features/features.dart';
 export  'package:flutter/foundation.dart';
 export 'dart:io';
+export 'features/splash/splash.dart';
+export 'firebase_options.dart';
+export 'package:flutter/services.dart';
+export 'package:firebase_auth/firebase_auth.dart';
+export 'package:firebase_core/firebase_core.dart';

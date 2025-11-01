@@ -1,6 +1,15 @@
 import '../../src.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
 @lazySingleton
-class AppRouter{
-  final GoRoute _route = GoRoute(path: AppRoutes.base);
+class AppRouter {
+  static GoRouter config = GoRouter(
+    initialLocation: AppRoutes.splash,
+    navigatorKey: navigatorKey,
+    routes: [
+      GoRoute(path: AppRoutes.splash,builder: (context,state) => SplashScreen()),
+      GoRoute(path: AppRoutes.login,builder: (context,state) => LoginScreen())
+    ],
+  );
 }
