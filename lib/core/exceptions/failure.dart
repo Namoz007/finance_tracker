@@ -7,4 +7,6 @@ class Failure{
 
   Failure({required this.type,this.message});
 
+  factory Failure.fromError({String? error}) => Failure(type: ErrorType.data_credential,message: error);
+
 }

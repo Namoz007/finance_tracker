@@ -1,9 +1,12 @@
 import 'package:finance/src.dart';
-import 'package:finance/src2.dart';
 
 abstract class AuthenticationDataSource{
 
-  Future<void> login({required LoginRequestEntity request});
+  Future<LoginResponseEntity> login({required LoginRequestEntity request});
+
+  Future<void> register({required RegisterRequestEntity request});
+
+  Future<bool> forgotPassword({required String email});
 
 }
 
@@ -11,15 +14,32 @@ abstract class AuthenticationDataSource{
 class AuthenticationDataSourceImpl extends AuthenticationDataSource{
 
   final FirebaseAuth _auth;
+  final Dio _dio;
 
-  AuthenticationDataSourceImpl() : _auth = FirebaseAuth.instance;
-
+  AuthenticationDataSourceImpl({required Dio dio}) : _dio = dio, _auth = FirebaseAuth.instance;
 
   @override
-  Future<void> login({required LoginRequestEntity request}) async{
-    print("login email ${request.email} ${request.password}");
+  Future<bool> forgotPassword({required String email}) async {
+    await _auth.sendPasswordResetEmail(email: email);
+    return true;
+  }
+
+  @override
+  Future<void> register({required RegisterRequestEntity request}) async{
+    await _auth.createUserWithEmailAndPassword(email: request.email, password: request.password);
+    sl<SharedPreferencesService>().setString(key: "email", value: request.email);
+    final response = await _dio.post(ApiConst.createUser + ".json",data: request.toJsonForCreateUser());
+    await _dio.patch(ApiConst.createUser + "/" + response.data['name'] + ".json",data: {"id":response.data['name']});
+  }
+
+  @override
+  Future<LoginResponseEntity> login({required LoginRequestEntity request}) async{
     final response = await _auth.signInWithEmailAndPassword(email: request.email, password: request.password);
-    print("bu responsecha login ${response}");
+
+    if(response.user?.email == null){
+      throw "User not found";
+    }
+    return LoginResponseModel.fromResponse(email: response.user!.email!);
   }
 
 }

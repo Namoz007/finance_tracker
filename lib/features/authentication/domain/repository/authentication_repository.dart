@@ -3,6 +3,10 @@ import "package:finance/src.dart";
 
 abstract class AuthenticationRepository{
 
-  Future<Either<Failure,void>> login({required LoginRequestEntity request});
+  Future<Either<Failure,LoginResponseEntity>> login({required LoginRequestEntity request});
+
+  Future<Either<Failure,void>> register({required RegisterRequestEntity request});
+
+  Future<Either<Failure,bool>> forgotPassword({required String email});
 
 }

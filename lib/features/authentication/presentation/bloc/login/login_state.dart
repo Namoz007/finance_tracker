@@ -9,6 +9,7 @@ abstract class LoginState with _$LoginState {
     required TextEditingController emailController,
     required TextEditingController passwordController,
     required bool obcureText,
+    required bool authenticated,
     Failure? error,
   }) = _LoginState;
 
@@ -17,5 +18,6 @@ abstract class LoginState with _$LoginState {
     emailController: TextEditingController(),
     passwordController: TextEditingController(),
     obcureText: false,
+    authenticated: false
   );
 }

@@ -9,7 +9,9 @@ class AppRouter {
     navigatorKey: navigatorKey,
     routes: [
       GoRoute(path: AppRoutes.splash,builder: (context,state) => SplashScreen()),
-      GoRoute(path: AppRoutes.login,builder: (context,state) => LoginScreen())
+      GoRoute(path: AppRoutes.login,builder: (context,state) => LoginScreen()),
+      GoRoute(path: AppRoutes.registration,builder: (context,state) => RegistrationScreen()),
+      GoRoute(path: AppRoutes.forgotPassword,builder: (context,state) => ForgotPasswordScreen()),
     ],
   );
 }

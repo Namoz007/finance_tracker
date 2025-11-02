@@ -1,9 +1,10 @@
 import '../../src.dart';
 
+@module
 abstract class DioClient{
 
   @lazySingleton
-  Dio provideDio(LocalStorage localStorage) {
+  Dio provideDio() {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConst.baseUrl,
