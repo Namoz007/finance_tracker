@@ -9,9 +9,12 @@ class UserManagementRepositoryImpl extends UserManagementRepository{
   UserManagementRepositoryImpl({required UserManagementDataSource dataSource}) : _dataSource = dataSource;
 
   @override
-  Future<Either<Failure, UserEntity>> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<Either<Failure, UserEntity>> getUser() async{
+    try{
+      return Right(await _dataSource.getUser());
+    }catch(e){
+      return Left(Failure(type: ErrorType.data_credential,));
+    }
   }
 
 

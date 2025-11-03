@@ -7,10 +7,12 @@ class UserManagementState with _$UserManagementState {
     @Default(RequestStatus.initial) RequestStatus status,
     @Default(UIResponseStatus.none) UIResponseStatus uiStatus,
     required UserEntity user,
-    Failure? error,
+    required bool haveAccount,
+    @Default(null) Failure? error,
+    @Default(null) String? successMessage,
   }) = _UserManagementState;
   
-  factory UserManagementState.initialState() => UserManagementState(user: UserModel());
+  factory UserManagementState.initialState() => UserManagementState(user: UserModel(),haveAccount: false);
   
   @override
   noSuchMethod(Invocation invocation) {

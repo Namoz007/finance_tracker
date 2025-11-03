@@ -12,6 +12,7 @@ class AppRouter {
       GoRoute(path: AppRoutes.login,builder: (context,state) => LoginScreen()),
       GoRoute(path: AppRoutes.registration,builder: (context,state) => RegistrationScreen()),
       GoRoute(path: AppRoutes.forgotPassword,builder: (context,state) => ForgotPasswordScreen()),
+      GoRoute(path: AppRoutes.main,builder: (context,state) => MainScreen(link: state.extra as String?,)),
     ],
   );
 }

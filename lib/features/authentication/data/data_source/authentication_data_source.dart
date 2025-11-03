@@ -26,7 +26,7 @@ class AuthenticationDataSourceImpl extends AuthenticationDataSource{
 
   @override
   Future<void> register({required RegisterRequestEntity request}) async{
-    await _auth.createUserWithEmailAndPassword(email: request.email, password: request.password);
+    await _auth.createUserWithEmailAndPassword(email: request.email, password: request.password,);
     sl<SharedPreferencesService>().setString(key: "email", value: request.email);
     final response = await _dio.post(ApiConst.createUser + ".json",data: request.toJsonForCreateUser());
     await _dio.patch(ApiConst.createUser + "/" + response.data['name'] + ".json",data: {"id":response.data['name']});
@@ -39,6 +39,7 @@ class AuthenticationDataSourceImpl extends AuthenticationDataSource{
     if(response.user?.email == null){
       throw "User not found";
     }
+    sl<SharedPreferencesService>().setString(key: "email", value: request.email);
     return LoginResponseModel.fromResponse(email: response.user!.email!);
   }
 

@@ -36,10 +36,16 @@ import 'package:finance/features/authentication/presentation/bloc/login/login_bl
     as _i571;
 import 'package:finance/features/authentication/presentation/bloc/register/register_bloc.dart'
     as _i7;
+import 'package:finance/features/main/presentation/bloc/main/main_bloc.dart'
+    as _i232;
 import 'package:finance/features/profile/data/data_source/user_management_data_source.dart'
     as _i716;
 import 'package:finance/features/profile/data/repository/user_management_repository.dart'
     as _i835;
+import 'package:finance/features/profile/domain/usecase/get_user_usecase.dart'
+    as _i511;
+import 'package:finance/features/profile/presentation/bloc/user_management/user_management_bloc.dart'
+    as _i358;
 import 'package:finance/src.dart' as _i364;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -60,12 +66,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i364.Dio>(() => dioClient.provideDio());
     gh.lazySingleton<_i300.AppRouter>(() => _i300.AppRouter());
     gh.lazySingleton<_i306.GeolocatorService>(() => _i306.GeolocatorService());
+    gh.lazySingleton<_i35.ImagePickerService>(() => _i35.ImagePickerService());
     gh.lazySingleton<_i983.PermissionHandlerService>(
       () => _i983.PermissionHandlerService(),
     );
     gh.lazySingleton<_i539.PhoneCallerService>(
       () => _i539.PhoneCallerService(),
     );
+    gh.lazySingleton<_i232.MainBloc>(() => _i232.MainBloc());
     gh.lazySingleton<_i760.AuthenticationDataSource>(
       () => _i760.AuthenticationDataSourceImpl(dio: gh<_i364.Dio>()),
     );
@@ -99,9 +107,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i498.NetWorkInfoPlusService>(
       () => _i498.NetWorkInfoPlusService(info: gh<_i364.NetworkInfo>()),
     );
-    gh.lazySingleton<_i35.ImagePickerService>(
-      () => _i35.ImagePickerService(picker: gh<_i364.ImagePicker>()),
-    );
     gh.lazySingleton<_i896.FilePickerService>(
       () => _i896.FilePickerService(picker: gh<_i364.FilePicker>()),
     );
@@ -111,6 +116,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i30.LoginUseCase>(
       () => _i30.LoginUseCase(repository: gh<_i364.AuthenticationRepository>()),
+    );
+    gh.lazySingleton<_i511.GetUserUseCase>(
+      () => _i511.GetUserUseCase(
+        repository: gh<_i364.UserManagementRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i358.UserManagementBloc>(
+      () => _i358.UserManagementBloc(useCase: gh<_i364.GetUserUseCase>()),
     );
     gh.factory<_i571.LoginBloc>(
       () => _i571.LoginBloc(loginUseCase: gh<_i30.LoginUseCase>()),

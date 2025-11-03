@@ -1,6 +1,6 @@
 import 'package:finance/src.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DefaultFirebaseOptions.currentPlatform;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -14,12 +14,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ToastificationWrapper(
-      child: MaterialApp.router(
-        routerConfig: AppRouter.config,
-        debugShowCheckedModeBanner: false,
-        title: "Finance Tracker",
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl<UserManagementBloc>(),
+          ),
+          BlocProvider(create: (context) => sl<MainBloc>())
+        ],
+        child: MaterialApp.router(
+          routerConfig: AppRouter.config,
+          debugShowCheckedModeBanner: false,
+          title: "Finance Tracker",
+        ),
       ),
     );
   }

@@ -4,4 +4,6 @@ part of 'user_management_bloc.dart';
 class UserManagementEvent with _$UserManagementEvent {
   const factory UserManagementEvent.started() = _Started;
   const factory UserManagementEvent.getUsr() = _GetUser;
+  const factory UserManagementEvent.updateAvatar() = _UpdateAvatar;
+  const factory UserManagementEvent.closeUIStatus() = _CloseUIStatus;
 }

@@ -1,0 +1,22 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
+  id: json['id'] as String? ?? '',
+  fullName: json['fullName'] as String? ?? '',
+  email: json['email'] as String? ?? '',
+  avatar: json['avatar'] as String? ?? null,
+  bio: json['bio'] as String? ?? null,
+  empty: json['empty'] as bool? ?? true,
+);
+
+Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'fullName': instance.fullName,
+      'email': instance.email,
+      'avatar': instance.avatar,
+      'bio': instance.bio,
+      'empty': instance.empty,
+    };

@@ -4,7 +4,7 @@ import '../../src.dart';
 class ImagePickerService{
   late final ImagePicker _picker;
 
-  ImagePickerService({required ImagePicker picker}) : _picker = picker;
+  ImagePickerService() : _picker = ImagePicker();
 
   // ==================== IMAGE PICKERS ====================
 

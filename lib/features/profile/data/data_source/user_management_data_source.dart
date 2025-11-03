@@ -14,9 +14,9 @@ class UserManagementDataSourceImpl extends UserManagementDataSource{
   UserManagementDataSourceImpl({required Dio dio}) : _dio = dio;
 
   @override
-  Future<UserEntity> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<UserEntity> getUser() async{
+    final response = await _dio.get(ApiConst.getUsers + ".json");
+    return UserModel.fromJsonForUser(json: response.data[(response.data as Map<String,dynamic>).keys.toList().where((value) => response.data[value]['email'] == sl<SharedPreferencesService>().getString(key: "email")).toList()[0]]);
   }
 
 

@@ -2,6 +2,7 @@ import 'package:finance/src.dart';
 
 import '../../../../src2.dart';
 
+@lazySingleton
 class GetUserUseCase extends BaseUseCase<UserEntity,NoParams>{
   final UserManagementRepository _repository;
 
